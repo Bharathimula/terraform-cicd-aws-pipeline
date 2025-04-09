@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Terraform Init') {
+      steps {
+        sh 'cd terraform && terraform init'
+      }
+    }
+    stage('Terraform Apply') {
+      steps {
+        sh 'cd terraform && terraform apply -auto-approve'
+      }
+    }
+    stage('Docker Build') {
+      steps {
+        sh 'cd app && docker build -t flask-app .'
+      }
+    }
+    stage('Deploy on EC2') {
+      steps {
+        sh 'scp -i ~/.ssh/my-key.pem app/* ubuntu@${EC2_IP}:/home/ubuntu/'
+        sh 'ssh -i ~/.ssh/my-key.pem ubuntu@${EC2_IP} "docker run -d -p 8080:8080 flask-app"'
+      }
+    }
+  }
+}
