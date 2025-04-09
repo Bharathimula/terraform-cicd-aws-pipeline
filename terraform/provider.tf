@@ -2,11 +2,8 @@ provider "aws" {
   region = var.aws_region
 }
 
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "key_name" {
-  default = "my-key" // Replace with your actual key pair name
+resource "aws_instance" "my_instance" {
+  ami           = "ami-0abcdef1234567890"
+  instance_type = var.instance_type
+  key_name      = var.key_name
 }
