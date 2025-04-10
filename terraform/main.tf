@@ -1,5 +1,5 @@
 resource "aws_instance" "jenkins_server" {
-  ami           = "ami-0967e5535761d839e" # Ubuntu 20.04 LTS for us-east-1
+  ami           = "ami-084568db4383264d4" # Ubuntu 20.04 LTS for us-east-1
   instance_type = var.instance_type
   key_name      = var.key_name
 
