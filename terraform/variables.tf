@@ -5,10 +5,10 @@ variable "aws_region" {
 
 variable "instance_type" {
   description = "EC2 instance type"
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 variable "key_name" {
   description = "AWS EC2 Key Pair name for SSH access"
-  default     = "my-key"  # Replace with your actual key pair name
+  default     = "aws_login"  # Replace with your actual key pair name
 }
