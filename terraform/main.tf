@@ -1,3 +1,19 @@
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical (official Ubuntu)
+}
+
 resource "aws_instance" "jenkins_server" {
   ami           = "ami-084568db4383264d4" # Ubuntu 20.04 LTS for us-east-1, x86_64, HVM, EBS-backed
   instance_type = var.instance_type
